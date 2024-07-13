@@ -1,0 +1,5 @@
+1号炮台，只需要更改推进器就能制造大量动能，威力更大
+2号炮台，更轻射速更快
+
+Battery 1 can generate a large amount of kinetic energy with greater power by simply changing the propulsion system
+Battery 2, lighter and faster firing rate
