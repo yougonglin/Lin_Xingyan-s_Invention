@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <video id="video" controls autoplay></video>
+  <button id="startRecording">开始录制</button>
+  <button id="stopRecording">停止录制</button>
+  <a id="downloadLink" download="recordedVideo.webm">下载视频</a>
+
+  <script>
+    const video = document.getElementById('video');
+    const startRecordingButton = document.getElementById('startRecording');
+    const stopRecordingButton = document.getElementById('stopRecording');
+    const downloadLink = document.getElementById('downloadLink');
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+     .then(stream => {
+        video.srcObject = stream;
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = event => {
+          if (event.data.size > 0) {
+            recordedChunks.push(event.data);
+          }
+        };
+
+        startRecordingButton.addEventListener('click', () => {
+          recordedChunks = [];
+          mediaRecorder.start();
+        });
+
+        stopRecordingButton.addEventListener('click', () => {
+          mediaRecorder.stop();
+        });
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          downloadLink.href = URL.createObjectURL(blob);
+          downloadLink.style.display = 'block';
+        };
+      })
+     .catch(error => {
+        console.error('获取媒体设备失败：', error);
+      });
+  </script>
+</body>
+
+</html>
