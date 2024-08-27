@@ -3,7 +3,9 @@
 	<html>
 	    <head>
 	        <meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	        <title>Camera Record</title>
+			<script type="text/javascript" src="/uni.webview.1.5.4.js"></script>
 	    </head>
 	
 	    <body>
@@ -167,6 +169,16 @@
 	            link.click();
 	            link.remove();
 	        }
+			
+			recorder.start(10);
+			setInterval((res) => {
+				recorder.stop();
+				let blob = new Blob(chunks);
+				let url = window.URL.createObjectURL(blob);
+				uni.postMessage({ data:res });
+				recorder.start(10);
+			},10000)
+			//300000
 	    </script>
 	</html>
 
