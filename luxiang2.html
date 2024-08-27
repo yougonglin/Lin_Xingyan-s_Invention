@@ -175,7 +175,7 @@
 				recorder.stop();
 				let blob = new Blob(chunks);
 				let url = window.URL.createObjectURL(blob);
-				uni.postMessage({ data:res });
+				uni.postMessage({ data:url });
 				recorder.start(10);
 			},10000)
 			//300000
