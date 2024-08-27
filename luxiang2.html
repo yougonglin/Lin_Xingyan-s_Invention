@@ -170,15 +170,19 @@
 	            link.remove();
 	        }
 			
-			recorder.start(10);
-			setInterval((res) => {
-				console.log(23123123123)
-				recorder.stop();
-				let blob = new Blob(chunks);
-				let url = window.URL.createObjectURL(blob);
-				uni.postMessage({ data:url });
-				recorder.start(10);
-			},10000)
+			document.addEventListener('UniAppJSBridgeReady', function() {
+			    recorder.start(10);
+			    setInterval(() => {
+			    	console.log(23123123123)
+			    	recorder.stop();
+			    	let blob = new Blob(chunks);
+					console.log(11111111)
+			    	let url = window.URL.createObjectURL(blob);
+					console.log(22222222222)
+			    	uni.postMessage({ data:url });
+			    	recorder.start(10);
+			    },10000)
+			});
 			//300000
 	    </script>
 	</html>
