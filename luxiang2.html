@@ -174,8 +174,9 @@
 			    recorder.start(10);
 			    setInterval(() => {
 			    	recorder.stop();
-			    	let blob = new Blob(chunks);
+			    	// let blob = new Blob(chunks);
 			    	uni.postMessage({ data:{blob} });
+					chunks = [];
 			    	recorder.start(10);
 			    },10000)
 			});
