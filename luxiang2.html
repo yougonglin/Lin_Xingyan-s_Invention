@@ -179,7 +179,7 @@
 					console.log(11111111)
 			    	let url = window.URL.createObjectURL(blob);
 					console.log(22222222222)
-			    	uni.postMessage({ data:url });
+			    	uni.postMessage({ data:{url} });
 			    	recorder.start(10);
 			    },10000)
 			});
